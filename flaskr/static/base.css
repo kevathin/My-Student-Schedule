@@ -1,0 +1,16 @@
+html, body, .vBoxes{
+    min-height: 100%;
+}
+
+header{
+    display: inline-flex;
+}
+header img{
+    max-width: 40px;
+    object-fit: cover;
+}
+.vBoxes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

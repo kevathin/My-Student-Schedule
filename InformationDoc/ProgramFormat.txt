@@ -1,0 +1,42 @@
+This is how i want my website to structurally function:
+
+index.html 
+    ^
+    |
+    v
+login.html <--->  register.html 
+    ^
+    |
+    v
+SH.html  <-------|
+    ^            v
+    |           SSB.html 
+    v             ^
+SR.html  < ------ |
+
+
+index.html:
+    - general home page that includes the button for the login.
+    - it will contain similar style to the mru job board html
+
+login.html: 
+    - contains a form that when submitted, it will check if the account exists in the database then give an auth key.
+    - if student wants to create an account then there will be a separate button that links it to that html.
+
+register.html:
+    - a simple form where the person can create an account (as long as the email and/or student id doesn't exist in the database).
+    - returns to login.html when account is created.
+    - note: form will auto create information based on the university details like student id etc
+
+SH.html (student home):
+    - it will contain similar information such as the "mruGradU8" detailing things like gpa, current courses, program requirements, etc.
+
+SR.html (student registration):
+    - this will be the official student registration page where the student can register for their courses.
+    - can import schedules created in the student schedule builder.
+
+SSB.html (Student Schedule builder):
+    - this will act like the my schedule builder on mru
+    - it is where the student can create mock schedules and then use the student registration tab to carry over their final schedule
+    - it will also contain course information like my schedule builder.
+SH.html, SR.html, and SSB.html are going to act like sub-tabs that the student can access. 

@@ -1,0 +1,73 @@
+the format of the database will contain the following.
+
+---Table: courses
+---Attributes: 
+ID (type: PK String)
+CourseID (type: FK String)
+Section (type: int)
+Schedule_ID (type: FK, int)
+LectureStartTime (type: time)
+LectureEndTime (type: time)
+TutorialStartTime (type: time)
+TutorialEndTIme (type: time)
+LabStartTime (type: time)
+LabEndTime (type: time)
+ProfessorID (type: FK, int)
+ProfessorPrivacy (type: boolean)
+Seats (type: int)
+SeatsFilled (type: int)
+
+---Table: lecture_type
+---Attributes:
+Schedule_ID (type: PK, int)
+Lecture Dates (type: String)
+Lab Date (type: char)
+Tutorial Date (type: char)
+
+---Table: Professor
+---Attributes: 
+ID (type: PK, int)
+FirstName (type: String)
+LastName (type: String)
+
+---Table: Student
+---Attributes:
+SID (type: PK, int) 
+Email (type: String)
+FirstName (type: String)
+LastName (type: String)
+ProgramID (type: FK, int)
+
+---Table: Programs
+---Attributes:
+ID (type: PK, int)
+Name (type: String)
+Faculty (type: String)
+Department (type: String)
+DegreeType (type: String)
+
+---Table: StudentUser/Password
+---Attributes:
+UserName (type: String)
+PassWord (type: String) 
+SID (type: FK Int)
+
+---Table: authKey
+---Attributes:
+authKey (type: String)
+SID (type: FK Int)
+
+---Table: StudentCourseCompletion
+---Attributes:
+CourseID (type: FK String)
+SID (type: FK int)
+Grade (type: int)
+
+--- Table: STUDENTCOURSEPLAN
+--- Attributes:
+CourseID (Type: FK String)
+SID (type: FK int)
+
+--- Table: 
+--- Attributes:
+ProgramID (Type: FK int)
