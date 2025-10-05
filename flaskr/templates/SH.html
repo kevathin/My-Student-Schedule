@@ -12,17 +12,17 @@
     <header>
         <img src="../static/imgs/mru-icon.png" alt="mru logo">
         <h3>MySS</h2>
-        <form action="http://10.239.48.93:5000/WorkSpace/StudentHome" method="post">
-            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="HPButton">Home Page</button>
+        <form action="http://10.239.48.93:5000/StudentHome" method="post">
+            <button type='submit' name='authKey' value='{{authKey}}' class='tabbutton' id='HPButton'>Home Page</button>  
         </form>
-        <form action="http://10.239.48.93:5000/WorkSpace/StudentScheduleBuilder" method="post" >
-            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="SBButton">Schedule Builder</button>
+        <form action="http://10.239.48.93:5000/StudentScheduleBuilder" method="post" >
+            <button type='submit' name='authKey' value='{{authKey}}' class='tabbutton' id='SBButton'>Schedule Builder</button>
         </form>
-        <form action="http://10.239.48.93:5000/WorkSpace/StudentRegister" method="post" >
-            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="CRButton">Course Registration</button>
+        <form action="http://10.239.48.93:5000/StudentRegister" method="post" >
+            <button type='submit' name='authKey' value='{{authKey}}' class='tabbutton' id='CRButton'>Course Registration</button>
         </form>
         <form action="http://10.239.48.93:5000/logout" method="post">
-            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="LOButton">logout</button>
+            <button type='submit' name='authKey' value='{{authKey}}' class='tabbutton' id='LOButton'>logout</button>
         </form>
     </header>
     <div class="vBoxes">

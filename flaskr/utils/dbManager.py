@@ -58,7 +58,7 @@ def createDB():
                      CourseID TEXT
                      );""")
 
-    dbCursor.execute("""CREATE TABLE STUDENT_USER_PASSWORD(
+    dbCursor.execute("""CREATE TABLE STUDENTUSERPASSWORD(
                      UserName TEXT,
                      Password TEXT,
                      SID INTEGER
@@ -87,6 +87,8 @@ def createDB():
                      CourseID TEXT,
                      SID int
                      );""")
+    
+    dbCursor.execute(f"SELECT * FROM STUDENTUSERPASSWORD")
     dbConnection.commit()
     dbCursor.close()
     dbConnection.close()
@@ -156,7 +158,7 @@ def dbChecker():
 def createAccount(username, password, SID):
     dbConnection = sqlite3.connect('flaskr/example.db')
     dbCursor = dbConnection.cursor()
-    dbCursor.execute("SELECT * FROM STUDENT_USER_PASSWORD WHERE UserName = ?", (username))
+    dbCursor.execute(f"SELECT * FROM STUDENTUSERPASSWORD WHERE UserName = '{username}'")
     result = dbCursor.fetchone()
     if result:
         dbCursor.close()
@@ -165,8 +167,137 @@ def createAccount(username, password, SID):
     dbCursor = dbConnection.cursor()
     md5_conv = hashlib.md5()
     md5_conv.update(password.encode('utf-8'))
-    dbCursor.execute("INSERT INTO STUDENT_USER_PASSWORD VALUES (?, ?, ?)", (username, md5_conv.hexdigest(), SID))
+    dbCursor.execute(f"INSERT INTO STUDENTUSERPASSWORD VALUES ('{username}', '{md5_conv.hexdigest()}', {SID})")
     dbConnection.commit()
+    dbCursor.close()
+    dbConnection.close()
+    return
+
+def wipeTempAuth():
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    dbCursor.execute("DELETE FROM AUTHKEYS")
+    dbConnection.commit()
+    dbCursor.close()
+    dbConnection.close()
+    return
+    
+def getSID(authKey):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    dbCursor.execute(f"SELECT * FROM AUTHKEYS WHERE AuthKey = {authKey}")
+    result = dbCursor.fetchone()
+    dbCursor.close()
+    dbConnection.close()
+    if result:
+        return result[1]
+    return None
+
+def getFullName(authKey):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    SID = getSID(authKey)
+    if SID:
+        dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
+        result = dbCursor.fetchone
+        FullName = result[2] +" "+ result[3]
+        dbCursor.close()
+        dbConnection.close()
+        return FullName
+    
+    dbCursor.close()
+    dbConnection.close()
+    return
+
+def getGPA(authKey):
+    return "N/a"
+
+def getDegree(authKey):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    SID = getSID(authKey)
+    if SID:
+        dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
+        result = dbCursor.fetchone
+        programID = result[4]
+        dbCursor.close()
+        dbCursor = dbConnection.cursor()
+        dbCursor.execute(f"SELECT * FROM PROGRAM WHERE ID = {programID}")
+        result = dbCursor.fetchone
+        Degree = result[4]
+        dbCursor.close()
+        dbConnection.close()
+        return Degree
+    dbCursor.close()
+    dbConnection.close()
+    return
+
+def getMajor(authKey):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    SID = getSID(authKey)
+    if SID:
+        dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
+        result = dbCursor.fetchone
+        programID = result[4]
+        dbCursor.close()
+        dbCursor = dbConnection.cursor()
+        dbCursor.execute(f"SELECT * FROM PROGRAM WHERE ID = {programID}")
+        result = dbCursor.fetchone
+        Degree = result[2]
+        dbCursor.close()
+        dbConnection.close()
+        return Degree
+    dbCursor.close()
+    dbConnection.close()
+    return
+
+def getProgram(authKey):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    SID = getSID(authKey)
+    if SID:
+        dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
+        result = dbCursor.fetchone
+        programID = result[4]
+        dbCursor.close()
+        dbCursor = dbConnection.cursor()
+        dbCursor.execute(f"SELECT * FROM PROGRAM WHERE ID = {programID}")
+        result = dbCursor.fetchone
+        Degree = result[1]
+        dbCursor.close()
+        dbConnection.close()
+        return Degree
+    dbCursor.close()
+    dbConnection.close()
+    return
+
+def getFaculty(authKey):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    SID = getSID(authKey)
+    if SID:
+        dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
+        result = dbCursor.fetchone
+        programID = result[4]
+        dbCursor.close()
+        dbCursor = dbConnection.cursor()
+        dbCursor.execute(f"SELECT * FROM PROGRAM WHERE ID = {programID}")
+        result = dbCursor.fetchone
+        Degree = result[3]
+        dbCursor.close()
+        dbConnection.close()
+        return Degree
+    dbCursor.close()
+    dbConnection.close()
+    return
+
+def getCompletedCourses(authKey):
+    return "N/a"
+
+def getPlannedCourses(authKey):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
     dbCursor.close()
     dbConnection.close()
     return
