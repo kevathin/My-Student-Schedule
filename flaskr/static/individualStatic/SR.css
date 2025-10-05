@@ -11,3 +11,45 @@
 #additionalInfo{
     grid-column: span 2;
 }
+
+#ScheduleRegister{
+    background-color: white;
+    margin-right: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    padding: 5px;
+    border-bottom: 1px gray solid;
+    border-radius: 10px;
+}
+
+.tuesday{
+    grid-column: 2;
+    background-color: pink;
+}
+
+.wednesday{
+    grid-column: 3;
+    background-color: aqua;
+}
+
+.thursday{
+    grid-column: 4;
+    background-color: brown;
+}
+
+.monday{
+    grid-column: 1;
+    background-color: red;
+}
+
+#courseSumBox div{
+    background-color: white;
+    border: 1px solid gray;
+}
+
+#courseSumBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: 5px;
+}

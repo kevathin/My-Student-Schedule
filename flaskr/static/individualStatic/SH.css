@@ -10,6 +10,7 @@
     margin-top: 10px;
     border-radius: 10px;
     padding: 20px;
+    border-bottom: 1px solid gray;
 }
 .programIMI{
     grid-column: span 2;
@@ -51,7 +52,13 @@
 
 #degreeBox, #GNEDBox, #ElectivesBox{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    border-bottom: 1px solid gray;
+}
+
+#degreeBox div, #GNEDBox div, #ElectivesBox div{
+    border-bottom: 1px solid gray;
 }
 
 #HPButton{

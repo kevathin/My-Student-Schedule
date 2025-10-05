@@ -28,31 +28,31 @@
     <div class="vBoxes">
         <div id="programInfoBox">
             <div class="programIMI">
-                <p class="subInfoTitle">Student ID</p>
+                <p class="subInfoTitle">Student ID:</p>
                 <p class="subInfoContent">{{SID}}</p>
             </div>
             <div class="programIMI">
-                <p class="subInfoTitle">Name</p>
+                <p class="subInfoTitle">Name:</p>
                 <p class="subInfoContent">{{FandLName}}</p>
             </div>
             <div class="programIMI">
-                <p class="miniInfoTitle">Degree</p>
+                <p class="miniInfoTitle">Degree:</p>
                 <p class="miniInfoContent">{{degree}}</p>
             </div>
             <div class="programINMI">
-                <p class="miniInfoTitle">Major</p>
+                <p class="miniInfoTitle">Major:</p>
                 <p class="miniInfoContent">{{major}}</p>
             </div>
             <div class="programINMI">
-                <p class="miniInfoTitle">Program</p>
+                <p class="miniInfoTitle">Program:</p>
                 <p class="miniInfoContent">{{Program}}</p>
             </div>
             <div class="programINMI">
-                <p class="miniInfoTitle">Collage</p>
+                <p class="miniInfoTitle">Collage:</p>
                 <p class="miniInfoContent">{{faculty}}</p>
             </div>
             <div class="programINMI">
-                <p class="miniInfoTitle">GPA</p>
+                <p class="miniInfoTitle">GPA:</p>
                 <p class="miniInfoContent">{{GPA}}</p>
             </div>
         </div>
@@ -69,19 +69,19 @@
             <p class="underl">you have {{MajorConclusion}} completed the major requirements</p>
             <p class="twowide underl">{{failedMajor}}</p>
             <p class="underl">you have {{GNEDConclusion}} completed the general education requirements</p>
-            <p class="twowide underl">{{failedConclusion}}</p>
+            <p class="twowide underl">{{failedGNED}}</p>
             <p class="underl">you have {{ElectiveConclusion}} completed the Electives</p>
             <p class="twowide underl">{{failedElective}}</p>
 
         </div>
         <div id="degreeBox">
-            {{degreeSpecificTable}}
+            {{ degreeSpecificTable|safe }}
         </div>
         <div id="GNEDBox">
-            {{GNEDSpecificTable}}
+            {{ GNEDSpecificTable|safe }}
         </div>
         <div id="ElectivesBox">
-            {{ElectivesSpecificTable}}
+            {{ ElectivesSpecificTable|safe }}
         </div>
     </div>
 </body>

@@ -128,16 +128,17 @@ def dbFiller():
     dbCursor.execute("""INSERT INTO COURSE VALUES ("COMP 2521", "Database 1", "pretty fun", "COMP 1701", "ProgReq");""")
     dbCursor.execute("""INSERT INTO COURSE VALUES ("MATH 1505", "Puzzling Adventures in Math", "headache", "", "ProgReq");""")
     dbCursor.execute("""INSERT INTO COURSE VALUES ("MGMT 3210", "Business Communication", "Prof yapped most of the time", "", "ProgReq");""")
-    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("ACCT 2121-001", 201745395)""")
-    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("PHYS 1201-001", 201745395)""")
-    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("MATH 1505-001", 201745395)""")
-    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("COMP 2511-001", 201745395)""")
-    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("COMP 1502-001", 201745395)""")
-    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("ACCT 2121-001", "ACCT 2121", 001, 104, 1000,1130 ,0 ,0 ,0 ,0,102, 0, 40,23 )""")
-    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("PHYS 1201-001", "PHYS 1201", 001, 104, 1130,1300 ,0 ,0 ,0 ,0,101, 0, 40,24 )""")
-    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("MATH 1505-001", "MATH 1505", 001, 108, 1130,1300 ,0 ,0 ,0 ,0,102, 0, 40,27 )""")
-    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("COMP 2511-001", "COMP 2511", 001, 108, 1000,1130 ,0 ,0 ,0 ,0,103, 0, 40,20 )""")
-    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("COMP 1502-001", "COMP 1502", 001, 108, 1300,1430 ,0 ,0 ,0 ,0,104, 0, 40,39 )""")
+    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("ACCT 2121-001", 201745395);""")
+    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("PHYS 1201-001", 201745395);""")
+    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("MATH 1505-001", 201745395);""")
+    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("COMP 2511-001", 201745395);""")
+    dbCursor.execute("""INSERT INTO STUDENTCOURSEPLAN VALUES ("COMP 1502-001", 201745395);""")
+    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("ACCT 2121-001", "ACCT 2121", 001, 104, 1000,1130 ,0 ,0 ,0 ,0,102, 0, 40,23 );""")
+    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("PHYS 1201-001", "PHYS 1201", 001, 104, 1130,1300 ,0 ,0 ,0 ,0,101, 0, 40,24 );""")
+    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("MATH 1505-001", "MATH 1505", 001, 108, 1130,1300 ,0 ,0 ,0 ,0,102, 0, 40,27 );""")
+    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("COMP 2511-001", "COMP 2511", 001, 108, 1000,1130 ,0 ,0 ,0 ,0,103, 0, 40,20 );""")
+    dbCursor.execute("""INSERT INTO ACTIVECOURSE VALUES ("COMP 1502-001", "COMP 1502", 001, 108, 1300,1430 ,0 ,0 ,0 ,0,104, 0, 40,39 );""")
+    dbConnection.commit()
     dbCursor.close()
     dbConnection.close()
 
@@ -185,29 +186,31 @@ def wipeTempAuth():
 def getSID(authKey):
     dbConnection = sqlite3.connect('flaskr/example.db')
     dbCursor = dbConnection.cursor()
-    dbCursor.execute(f"SELECT * FROM AUTHKEYS WHERE AuthKey = {authKey}")
+    dbCursor.execute(f"SELECT * FROM AUTHKEYS WHERE AuthKey = '{authKey}'")
     result = dbCursor.fetchone()
     dbCursor.close()
     dbConnection.close()
     if result:
+        print(result[1])
         return result[1]
+    print("damn")
     return None
 
 def getFullName(authKey):
+    
+    SIDt = getSID(authKey)
     dbConnection = sqlite3.connect('flaskr/example.db')
     dbCursor = dbConnection.cursor()
-    SID = getSID(authKey)
-    if SID:
-        dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
-        result = dbCursor.fetchone
-        FullName = result[2] +" "+ result[3]
+    dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SIDt}")
+    result2 = dbCursor.fetchone()
+    print(result2[3])
+    if result2:
+        FullName = f"{result2[2]}  {result2[3]}"
         dbCursor.close()
         dbConnection.close()
         return FullName
     
-    dbCursor.close()
-    dbConnection.close()
-    return
+    
 
 def getGPA(authKey):
     return "N/a"
@@ -218,12 +221,12 @@ def getDegree(authKey):
     SID = getSID(authKey)
     if SID:
         dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
-        result = dbCursor.fetchone
+        result = dbCursor.fetchone()
         programID = result[4]
         dbCursor.close()
         dbCursor = dbConnection.cursor()
         dbCursor.execute(f"SELECT * FROM PROGRAM WHERE ID = {programID}")
-        result = dbCursor.fetchone
+        result = dbCursor.fetchone()
         Degree = result[4]
         dbCursor.close()
         dbConnection.close()
@@ -238,12 +241,12 @@ def getMajor(authKey):
     SID = getSID(authKey)
     if SID:
         dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
-        result = dbCursor.fetchone
+        result = dbCursor.fetchone()
         programID = result[4]
         dbCursor.close()
         dbCursor = dbConnection.cursor()
         dbCursor.execute(f"SELECT * FROM PROGRAM WHERE ID = {programID}")
-        result = dbCursor.fetchone
+        result = dbCursor.fetchone()
         Degree = result[2]
         dbCursor.close()
         dbConnection.close()
@@ -258,12 +261,12 @@ def getProgram(authKey):
     SID = getSID(authKey)
     if SID:
         dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
-        result = dbCursor.fetchone
+        result = dbCursor.fetchone()
         programID = result[4]
         dbCursor.close()
         dbCursor = dbConnection.cursor()
         dbCursor.execute(f"SELECT * FROM PROGRAM WHERE ID = {programID}")
-        result = dbCursor.fetchone
+        result = dbCursor.fetchone()
         Degree = result[1]
         dbCursor.close()
         dbConnection.close()
@@ -278,12 +281,12 @@ def getFaculty(authKey):
     SID = getSID(authKey)
     if SID:
         dbCursor.execute(f"SELECT * FROM STUDENT WHERE SID = {SID}")
-        result = dbCursor.fetchone
+        result = dbCursor.fetchone()
         programID = result[4]
         dbCursor.close()
         dbCursor = dbConnection.cursor()
         dbCursor.execute(f"SELECT * FROM PROGRAM WHERE ID = {programID}")
-        result = dbCursor.fetchone
+        result = dbCursor.fetchone()
         Degree = result[3]
         dbCursor.close()
         dbConnection.close()
@@ -298,6 +301,26 @@ def getCompletedCourses(authKey):
 def getPlannedCourses(authKey):
     dbConnection = sqlite3.connect('flaskr/example.db')
     dbCursor = dbConnection.cursor()
+    dbCursor.execute("SELECT * FROM ACTIVECOURSE")
+    result = dbCursor.fetchall()
     dbCursor.close()
     dbConnection.close()
-    return
+    return result
+
+def getRequiredCourses(authKey):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    dbCursor.execute("SELECT * FROM COURSE")
+    result = dbCursor.fetchall()
+    dbCursor.close()
+    dbConnection.close()
+    return result
+
+def getCourseFullName(courseID):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    dbCursor.execute(f"SELECT * FROM COURSE WHERE CourseID = '{courseID}'")
+    result = dbCursor.fetchone()
+    dbCursor.close()
+    dbConnection.close()
+    return result[1]

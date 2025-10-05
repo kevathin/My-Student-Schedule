@@ -1,37 +1,83 @@
 #SBBox{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    
     gap: 10px;
 }
 
 .courseSpot{
     grid-row: span 2;
-    background-color: orange;
+    background-color: white;
     margin-left: 10px;
+    border-bottom: 1px gray solid;
+    border-radius: 10px;
 }
 
 .searchCourseSpot{
     grid-row: span 2;
     grid-column: span 2;
-    background-color: aqua;
+     background-color: white;
     margin-right: 10px;
+    border-bottom: 1px gray solid;
+    border-radius: 10px;
 }
 
 #searchBar{
     grid-column: span 2;
-    background-color: black;
+    background-color: white;
     margin-right: 10px;
+    border-bottom: 1px gray solid;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 50px;
 }
 
 #activeSchedule{
     grid-column: span 2;
     grid-row: span 3;
-    background-color: brown;
+    background-color: white;
     margin-right: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    padding: 5px;
+    border-bottom: 1px gray solid;
+    border-radius: 10px;
 }
 
 #SBButton{
     border: 0px;
     background-color: rgb(240, 240, 240);
+}
+
+.tuesday{
+    grid-column: 2;
+    background-color: pink;
+}
+
+.wednesday{
+    grid-column: 3;
+    background-color: aqua;
+}
+
+.thursday{
+    grid-column: 4;
+    background-color: brown;
+}
+
+.monday{
+    grid-column: 1;
+    background-color: red;
+}
+
+.courseBox{
+    display: flex;
+    padding: 8px;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+.courseTitleBox{
+    background-color: aquamarine;
+    height: 20px;
 }
