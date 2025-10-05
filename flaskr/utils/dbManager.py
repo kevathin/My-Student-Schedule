@@ -1,5 +1,5 @@
 import sqlite3
-
+import hashlib
 
 
 def createDB():
@@ -60,12 +60,12 @@ def createDB():
 
     dbCursor.execute("""CREATE TABLE STUDENT_USER_PASSWORD(
                      UserName TEXT,
-                     PASSWORD TEXT,
+                     Password TEXT,
                      SID INTEGER
                      );""")
     
     dbCursor.execute("""CREATE TABLE AUTHKEYS(
-                     authKey TEXT PRIMARY KEY,
+                     AuthKey TEXT PRIMARY KEY,
                      SID INTEGER
                      );""")
     
@@ -87,7 +87,7 @@ def createDB():
                      CourseID TEXT,
                      SID int
                      );""")
-    
+    dbConnection.commit()
     dbCursor.close()
     dbConnection.close()
     return True
@@ -95,14 +95,30 @@ def createDB():
 def dbFiller():
     dbConnection = sqlite3.connect('flaskr/example.db')
     dbCursor = dbConnection.cursor()
-
+    dbCursor.execute("""INSERT INTO PROFESSOR VALUES (101, "john", "doe");""")
+    dbCursor.execute("""INSERT INTO PROFESSOR VALUES (102, "jane", "doe");""")
+    dbCursor.execute("""INSERT INTO PROFESSOR VALUES (103, "jack", "black");""")
+    dbCursor.execute("""INSERT INTO PROFESSOR VALUES (104, "morgan", "freeman");""")
+    dbCursor.execute("""INSERT INTO PROGRAM VALUES (101, "Bachelor of Comp Info Systems", "Comp Info Systems", "Science and Technology", "Bachelor of Computer Information Systems");""")
+    dbCursor.execute("""INSERT INTO PROGRAM VALUES (102, "Bachelor of Computer Science", "Computer Science", "Science and Technology", "Bachelor of Science");""")
+    dbCursor.execute("""INSERT INTO STUDENT VALUES (201745395, "kbert395@mtroyal.ca", "Kevin", "Bertasius", 101);""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (101, "mw", 'f', 'f');""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (102, "mw", 'n', 'f');""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (103, "mw", 'f', 'n');""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (104, "mw", 'n', 'n');""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (105, "th", 'f', 'f');""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (106, "th", 'n', 'f');""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (107, "th", 'f', 'n');""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (108, "th", 'n', 'n');""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (109, "h", 'n', 'n');""")
+    dbCursor.execute("""INSERT INTO LECTURE_TYPE VALUES (110, "m", 'n', 'n');""")
+    #dbCursor.execute("""INSERT INTO STUDENT_USER_PASSWORD VALUES ("kbert395@mtroyal.ca", "fk3u98rufGY13X/ivUdzmA==", 201745395);""")
     dbCursor.close()
     dbConnection.close()
 
 def dbChecker():
     try: 
         dbConnection = sqlite3.connect('flaskr/example.db')
-
         dbCursor = dbConnection.cursor()
 
         dbCursor.execute("""SELECT SID
@@ -113,3 +129,14 @@ def dbChecker():
         dbConnection.close()
     except:
         createDB()
+
+def createAccount(username, password, SID):
+    dbConnection = sqlite3.connect('flaskr/example.db')
+    dbCursor = dbConnection.cursor()
+    md5_conv = hashlib.md5()
+    md5_conv.update(password.encode('utf-8'))
+    dbCursor.execute("INSERT INTO STUDENT_USER_PASSWORD VALUES (?, ?, ?)", (username, md5_conv.hexdigest(), SID))
+    dbConnection.commit()
+    dbCursor.close()
+    dbConnection.close()
+    return

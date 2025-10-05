@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from utils.auth import authUser, authKeyCheck
-from utils.dbManager import dbChecker
+from utils.auth import authUser, authKeyCheck, authLogOut
+from utils.dbManager import dbChecker, createAccount
 app = Flask(__name__)
 
 @app.route('/')
@@ -11,6 +11,20 @@ def index():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     return render_template("login.html")
+
+@app.route('/createAccount', methods=['POST', 'GET'])
+def createAccountapp():
+
+    if request.method == 'POST':
+        createAccount(request.form['uname'], request.form['upass'], request.form['SID'])
+
+    return render_template("login.html")
+
+@app.route('/logout', methods=['POST', 'GET'])
+def logout():
+
+    authLogOut(request.form['authKey'])
+    return render_template("index.html")
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():

@@ -41,10 +41,10 @@ ProgramID (type: FK, int)
 ---Table: Programs
 ---Attributes:
 ID (type: PK, int)
-Name (type: String)
+Program (type: String)
+Major (type: String)
 Faculty (type: String)
-Department (type: String)
-DegreeType (type: String)
+Degree (type: String)
 
 ---Table: StudentUser/Password
 ---Attributes:
