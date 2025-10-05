@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    dbChecker()
     return render_template("index.html")
 
 @app.route('/login', methods=['POST', 'GET'])

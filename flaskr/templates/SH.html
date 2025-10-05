@@ -3,9 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../static/base.css">
+    <link rel="stylesheet" href="../static/SubClassStatic/SHubStyle.css">
+    <link rel="stylesheet" href="../static/individualStatic/SH.css">
+    <title>MySS Student Home</title>
 </head>
 <body>
-    <h1>Welcome </h1>
+    <header>
+        <img src="../static/imgs/mru-icon.png" alt="mru logo">
+        <h3>MySS</h2>
+        <form action="http://10.239.48.93:5000/WorkSpace/StudentHome" method="post">
+            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="HPButton">Home Page</button>
+        </form>
+        <form action="http://10.239.48.93:5000/WorkSpace/StudentScheduleBuilder" method="post" >
+            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="SBButton">Schedule Builder</button>
+        </form>
+        <form action="http://10.239.48.93:5000/WorkSpace/StudentRegister" method="post" >
+            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="CRButton">Course Registration</button>
+        </form>
+    </header>
+    <div class="vBoxes">
+        <div id="programInfoBox">
+            <div class="programIMI">
+                <p class="subInfoTitle">Student ID</p>
+                <p class="subInfoContent">{{SID}}</p>
+            </div>
+            <div class="programIMI">
+                <p class="subInfoTitle">Name</p>
+                <p class="subInfoContent">{{FandLName}}</p>
+            </div>
+            <div class="programIMI">
+                <p class="miniInfoTitle">Degree</p>
+                <p class="miniInfoContent">{{degree}}</p>
+            </div>
+            <div class="programINMI">
+                <p class="miniInfoTitle">Major</p>
+                <p class="miniInfoContent">{{major}}</p>
+            </div>
+            <div class="programINMI">
+                <p class="miniInfoTitle">Program</p>
+                <p class="miniInfoContent">{{Program}}</p>
+            </div>
+            <div class="programINMI">
+                <p class="miniInfoTitle">Collage</p>
+                <p class="miniInfoContent">{{faculty}}</p>
+            </div>
+            <div class="programINMI">
+                <p class="miniInfoTitle">GPA</p>
+                <p class="miniInfoContent">{{GPA}}</p>
+            </div>
+        </div>
+
+        <div id="programRequirements">
+            <p class="threewide" id="degreeTitle">{{degree}}</p>
+            <p>Credits required: 120</p>
+            <p>Credits applied: {{totalCredits}}</p>
+            <p>Program GPA: {{GPA}}</p>
+            <p class="underl">Conditions for graduation</p>
+            <p class="twowide underl">A minimum of 120 credits are required. A minimum of 2.0 GPA is required. Completion of General Education is Required. Completion of Major Requirements is required</p>
+            <p class="underl">you have {{GPAConclusion}} acquired a minimum of a 2.0 GPA</p>
+            <p class="twowide underl">{{failedGPA}}</p>
+            <p class="underl">you have {{MajorConclusion}} completed the major requirements</p>
+            <p class="twowide underl">{{failedMajor}}</p>
+            <p class="underl">you have {{GNEDConclusion}} completed the general education requirements</p>
+            <p class="twowide underl">{{failedConclusion}}</p>
+            <p class="underl">you have {{ElectiveConclusion}} completed the Electives</p>
+            <p class="twowide underl">{{failedElective}}</p>
+
+        </div>
+        <div id="degreeBox">
+            {{degreeSpecificTable}}
+        </div>
+        <div id="GNEDBox">
+            {{GNEDSpecificTable}}
+        </div>
+        <div id="ElectivesBox">
+            {{ElectivesSpecificTable}}
+        </div>
+    </div>
 </body>
 </html>

@@ -2,6 +2,7 @@
     background-image: url("../imgs/Campus-MRU.jpg");
     background-repeat: no-repeat;
     object-fit: cover;
+    background-size: 100%;
     padding: 50px;
 }
 

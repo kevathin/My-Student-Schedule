@@ -1,0 +1,28 @@
+html, body{
+    margin: 0%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.userInfo{
+    width: 300px;
+    height: 30px;
+    margin-bottom: 30px;
+}
+form{
+    margin: 50px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+#signIn{
+    width: 75px;
+    height: 40px;
+}
+p{
+    margin-left: 70px;
+}

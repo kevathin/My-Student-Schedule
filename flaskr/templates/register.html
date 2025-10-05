@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../static/base.css">
+    <link rel="stylesheet" href="../static/SubClassStatic/authstyle.css">
+    <link rel="stylesheet" href="../static/individualStatic/register.css">
+    <title>MySS Sign Up</title>
 </head>
 <body>
-    <h1>this is the register page</h1>
+    <header>
+        <img src="../static/imgs/mru-icon.png" alt="mru logo">
+        <h3>MySS</h2>
+    </header>
+    <form action="http://10.239.48.93:5000/login" method="post">
+        <input type="text" id="uname" name="uname" placeholder="MRU email (ex: jbrok123@mtroyal.ca)" class="userInfo" required>
+        <input type="text" id="upass" name="upass" placeholder="Password" class="userInfo" required>
+        <input type="text" id="SID" name="SID" placeholder="studentID" class="userInfo" required>
+        <input type="submit", value="Sign Up" id="signIn">
+    </form>
 </body>
 </html>

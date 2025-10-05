@@ -1,0 +1,61 @@
+#programInfoBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+#programInfoBox, #programRequirements, #degreeBox, #GNEDBox, #ElectivesBox{
+    background-color: white;
+    width: 75%;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 20px;
+}
+.programIMI{
+    grid-column: span 2;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 10px;
+    border: solid black 1px;
+}
+
+.programIMI p {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.programINMI{
+    display: flex;
+}
+
+.miniInfoTitle{
+    margin-right: 5px;
+}
+
+#programRequirements{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.twowide{
+    grid-column: span 2;
+}
+
+.underl{
+    border-bottom: 1px solid gray;
+}
+.threewide{
+    grid-column: span 3;
+}
+
+#degreeBox, #GNEDBox, #ElectivesBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#HPButton{
+    border: 0px;
+    background-color: rgb(240, 240, 240);
+}
+

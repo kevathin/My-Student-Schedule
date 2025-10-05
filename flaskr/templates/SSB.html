@@ -3,9 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../static/base.css">
+    <link rel="stylesheet" href="../static/SubClassStatic/SHubStyle.css">
+    <link rel="stylesheet" href="../static/individualStatic/SSB.css">
+    <title>MySS Schedule Builder</title>
 </head>
 <body>
-    <h1>this is the SSB page</h1>
+    <header>
+        <img src="../static/imgs/mru-icon.png" alt="mru logo">
+        <h3>MySS</h2>
+        <form action="http://10.239.48.93:5000/WorkSpace/StudentHome" method="post">
+            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="HPButton">Home Page</button>
+        </form>
+        <form action="http://10.239.48.93:5000/WorkSpace/StudentScheduleBuilder" method="post" >
+            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="SBButton">Schedule Builder</button>
+        </form>
+        <form action="http://10.239.48.93:5000/WorkSpace/StudentRegister" method="post" >
+            <button type="submit" name="authKey" value={{authKey}} class="tabbutton" id="CRButton">Course Registration</button>
+        </form>
+    </header>
+    <div id="SBBox">
+        <div class="courseSpot">
+            {{courseOne}}
+        </div>
+        <div id="searchBar">
+            <form>
+                <input type="text" id="searchCourse" name="searchCourse" placeholder="EX: COMP 2541">
+            </form>
+        </div>
+        <div class="searchCourseSpot">
+
+        </div>
+        <div class="courseSpot">
+            {{courseTwo}}
+        </div>
+        <div class="searchCourseSpot">
+
+        </div>
+        <div class="courseSpot">
+            {{courseThree}}
+        </div>
+        <div class="searchCourseSpot">
+
+        </div>
+        <div class="courseSpot">
+            {{courseFour}}
+        </div>
+        <div id="activeSchedule">
+            {{activeScheduleView}}
+        </div>
+        <div class="courseSpot">
+            {{courseFive}}
+        </div>
+    </div>
 </body>
 </html>

@@ -47,10 +47,10 @@ def createDB():
     
     dbCursor.execute("""CREATE TABLE PROGRAM(
                      ID INTEGER PRIMARY KEY,
-                     Name TEXT,
+                     Program TEXT,
+                     Major TEXT,
                      Faculty TEXT,
-                     Department TEXT,
-                     DegreeType TEXT
+                     Degree TEXT
                      );""")
     
     dbCursor.execute("""CREATE TABLE PROGRAMCOURSEREQUIREMENT(
@@ -73,7 +73,8 @@ def createDB():
                      CourseID TEXT PRIMARY KEY, 
                      Name TEXT,
                      Description TEXT,
-                     Prerequisites TEXT
+                     Prerequisites TEXT,
+                     Classification TEXT
                      );""")
     
     dbCursor.execute("""CREATE TABLE STUDENTCOURSECOMPLETION(

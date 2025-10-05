@@ -17,3 +17,4 @@ def authKeyCheck(authKey):
     dbCursor.close()
     dbConnection.close()
     return True
+
