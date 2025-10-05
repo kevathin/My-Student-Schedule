@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request
 from utils.auth import authUser, authKeyCheck, authLogOut
-from utils.dbManager import dbChecker, createAccount
+from utils.dbManager import dbChecker, createAccount, dbFiller
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     dbChecker()
+    dbFiller()
     return render_template("index.html")
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -16,8 +17,12 @@ def login():
 def createAccountapp():
 
     if request.method == 'POST':
-        createAccount(request.form['uname'], request.form['upass'], request.form['SID'])
-
+        result = createAccount(request.form['uname'], request.form['upass'], request.form['SID'])
+        if result == "accOverLap":
+            return render_template("register.html", error = "Account Already Exists")
+    else:
+        return render_template("register.html", error = "invalid method used")
+    
     return render_template("login.html")
 
 @app.route('/logout', methods=['POST', 'GET'])
@@ -46,7 +51,7 @@ def studentHome():
     error = None
     if request.method == 'POST':
         authKey = request.form['authKey']
-        if authKeyCheck(authKey) == True:
+        if authKeyCheck(authKey) != "failure":
             return render_template('SH.html', authKey = authKey)
         else: 
             error = 'authKey expired/not found'
@@ -56,7 +61,7 @@ def studentHome(authKey):
     error = None
     if request.method == 'POST':
         authKey = request.form['authKey']
-        if authKeyCheck(authKey) == True:
+        if authKeyCheck(authKey) != "failure":
             return render_template('SH.html', authKey = authKey)
         else: 
             error = 'authKey expired/not found'
@@ -67,7 +72,7 @@ def studentRegister():
     error = None
     if request.method == 'POST':
         authKey = request.form['authKey']
-        if authKeyCheck(authKey) == True:
+        if authKeyCheck(authKey) != "failure":
             return render_template('SH.html', authKey = authKey)
         else: 
             error = 'authKey expired/not found'
@@ -78,7 +83,7 @@ def studentScheduleBuilder():
     error = None
     if request.method == 'POST':
         authKey = request.form['authKey']
-        if authKeyCheck(authKey) == True:
+        if authKeyCheck(authKey) != "failure":
             return render_template('SH.html', authKey = authKey)
         else: 
             error = 'authKey expired/not found'

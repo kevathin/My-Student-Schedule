@@ -22,7 +22,7 @@ def authUser(user, password):
     else:
         dbCursor.close()
         dbConnection.close()
-        return None
+        return "failure"
 
 def authKeyCheck(authKey):
     dbConnection = sqlite3.connect('example.db')

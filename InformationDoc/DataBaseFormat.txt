@@ -1,6 +1,6 @@
 the format of the database will contain the following.
 
----Table: courses
+---Table: active courses
 ---Attributes: 
 ID (type: PK String)
 CourseID (type: FK String)
@@ -68,6 +68,10 @@ Grade (type: int)
 CourseID (Type: FK String)
 SID (type: FK int)
 
---- Table: 
+--- Table: course
 --- Attributes:
-ProgramID (Type: FK int)
+courseID (Type: pk TEXT)
+Name (Type: TEXT)
+Description (Type Text)
+prerequisites (type fk TEXT)
+Classification (type Text)
