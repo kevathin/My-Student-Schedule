@@ -13,7 +13,7 @@ def login():
     return render_template("login.html")
 
 @app.route('/createAccount', methods=['POST', 'GET'])
-def createAccountapp():
+def createAccount():
 
     if request.method == 'POST':
         result = createAccount(request.form['uname'], request.form['upass'], request.form['SID'])
@@ -35,18 +35,18 @@ def register():
     return render_template("register.html")
 
 @app.route('/WorkSpace', methods=['POST', 'GET'])
-def accessWorkSpace():
+def WorkSpace():
     error = None
     if request.method == 'POST':
         authKey = authUser(request.form['uname'], request.form['upass'])
         if  authKey != "failure":
-            return studentHome(authKey)
+            return StudentHome(authKey)
         else:
             error = 'Invalid username/password'
     return render_template('login.html', error=error)
 
 @app.route('/StudentHome', methods=['POST', 'GET'])
-def studentHome():
+def StudentHome():
     error = None
     if request.method == 'POST':
         authKey = request.form['authKey']
@@ -80,7 +80,7 @@ def studentHome():
     else:
         print("failed SH post con")
 
-def studentHome(authKey):
+def StudentHome(authKey):
     error = None
     if authKeyCheck(authKey) != "failure":
         return render_template('SH.html', authKey = authKey,
@@ -110,7 +110,7 @@ def studentHome(authKey):
 
 
 @app.route('/StudentRegister', methods=['POST', 'GET'])
-def studentRegister():
+def StudentRegister():
     print("")
     error = None
     if request.method == 'POST':
@@ -127,7 +127,7 @@ def studentRegister():
         print("failed SR post con")
         
 @app.route('/StudentScheduleBuilder', methods=['POST', 'GET'])
-def studentScheduleBuilder():
+def StudentScheduleBuilder():
     error = None
     if request.method == 'POST':
         authKey = request.form['authKey']
