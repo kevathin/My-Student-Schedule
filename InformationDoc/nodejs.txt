@@ -1,0 +1,10 @@
+Basic Step By Step process to use node js:
+
+1. create js files in frontend/src/
+2. build the js files using vite
+3. copy the files over to flaskr/static/js/
+4. run code as normal
+
+node js allows me to export/import from other js files.
+it also allows me to use any additional tools that i may want to use in the future. 
+that is about all i know.
